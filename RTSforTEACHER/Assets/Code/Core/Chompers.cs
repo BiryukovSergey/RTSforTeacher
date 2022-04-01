@@ -2,12 +2,12 @@ using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Chompers : CommandExecutorBase<IAttackCommand>,ISelectable
+public class Chompers : CommandExecutorBase<IAttackCommand>,ISelecatable
 {
     [SerializeField] private float _maxHealth = 250;
     [SerializeField] private Sprite _icon;
+    [SerializeField] private Transform _pivotPoint;
     
     private float _health = 250;
     public float Health => _health;
@@ -15,6 +15,7 @@ public class Chompers : CommandExecutorBase<IAttackCommand>,ISelectable
     public Sprite Icon => _icon;
     
     public Vector3 PositionIllusion => transform.position;
+    public Transform PivotPoint => _pivotPoint;
 
 
     public override void ExecuteSpecificCommand(IAttackCommand command)

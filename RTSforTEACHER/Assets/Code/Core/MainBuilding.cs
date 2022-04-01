@@ -3,9 +3,10 @@ using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
-public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
+public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelecatable
 {
     [SerializeField] private Transform _unitsParent;
+    [SerializeField] private Transform _pivotPoint;
     [SerializeField] private float _maxHealth = 1000;
     [SerializeField] private Sprite _icon;
 
@@ -16,6 +17,7 @@ public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISe
     public Sprite Icon => _icon;
     public Vector3 PositionIllusion => transform.position;
 
+    public Transform PivotPoint => _pivotPoint;
 
     public override void ExecuteSpecificCommand(IProduceUnitCommand command) 
         => Instantiate(command.UnitPrefab, 

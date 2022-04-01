@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Abstractions;
 using Abstractions.Commands;
-using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
-using UserControlSystem.CommandsRealization;
 using UserControlSystem.UI.View;
-using Code.Core;
+using Zenject;
 
 namespace UserControlSystem.UI.Presenter
 {
@@ -14,26 +11,35 @@ namespace UserControlSystem.UI.Presenter
     {
         [SerializeField] private SelectableValue _selectable;
         [SerializeField] private CommandButtonsView _view;
-        [SerializeField] private AssetsContext _context;
+        
+        [Inject] private CommandButtonsModel _model;
+        
+        private ISelecatable _currentSelecatable;
 
-        private ISelectable _currentSelectable;
 
         private void Start()
         {
-            _selectable.OnSelected += ONSelected;
-            ONSelected(_selectable.CurrentValue);
+            _view.OnClick += _model.OnCommandButtonClicked;
+            _model.OnCommandSent += _view.UnblockAllInteractions;
+            _model.OnCommandCancel += _view.UnblockAllInteractions;
+            _model.OnCommandAccepted += _view.BlockInteractions;
+            _selectable.OnNewValue += onSelected;
+            onSelected(_selectable.CurrentValue);
 
-            _view.OnClick += ONButtonClick;
         }
-
-        private void ONSelected(ISelectable selectable)
+        
+        private void onSelected(ISelecatable selectable)
         {
-            if (_currentSelectable == selectable)
+            if (_currentSelecatable == selectable)
             {
                 return;
             }
-            _currentSelectable = selectable;
-
+            if (_currentSelecatable != null)
+            {
+                _model.OnSelectionChanged();
+            }
+            _currentSelecatable = selectable;
+            
             _view.Clear();
             
             if (selectable != null)
@@ -43,7 +49,7 @@ namespace UserControlSystem.UI.Presenter
                 _view.MakeLayout(commandExecutors);
             }
         }
-
+/*
         private void ONButtonClick(ICommandExecutor commandExecutor)
         {
             var unitProducer = commandExecutor as CommandExecutorBase<IProduceUnitCommand>;
@@ -78,6 +84,6 @@ namespace UserControlSystem.UI.Presenter
             }
             throw new ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(ONButtonClick)}: " +
                                            $"Unknown type of commands executor: {commandExecutor.GetType().FullName}!");
-        }
+        }*/
     }
 }
