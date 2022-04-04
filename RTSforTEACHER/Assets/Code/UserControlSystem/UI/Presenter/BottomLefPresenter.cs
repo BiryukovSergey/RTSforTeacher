@@ -18,11 +18,11 @@ namespace UserControlSystem
    
         private void Start()
         {
-            _selectedValue.OnNewValue += onSelected;
+            _selectedValue.OnSelected += onSelected;
             onSelected(_selectedValue.CurrentValue);
         }
 
-        private void onSelected(ISelecatable selected)
+        private void onSelected(ISelectable selected)
         {
             _selectedImage.enabled = selected != null;
             _healthSlider.gameObject.SetActive(selected != null);
@@ -31,6 +31,7 @@ namespace UserControlSystem
             
             if (selected != null)
             {
+                Debug.Log(selected);
                 _spriteRenderer.transform.position = selected.PositionIllusion;
                 _spriteRenderer.enabled = true;
                 _selectedImage.sprite = selected.Icon;
