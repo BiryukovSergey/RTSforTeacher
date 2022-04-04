@@ -1,14 +1,15 @@
-﻿using Abstractions.Commands;
+﻿using Abstractions;
 using Abstractions.Commands.CommandsInterfaces;
-using UnityEngine;
 
 namespace Code.Core
 {
-    public class AttackCommand : CommandExecutorBase<IAttackCommand>,IAttackCommand
+    public class AttackCommand : IAttackCommand
     {
-        public override void ExecuteSpecificCommand(IAttackCommand command)
+        public IAttackable Target { get; }
+
+        public AttackCommand(IAttackable attackable)
         {
-            Debug.Log("Attack");
+            Target = attackable;
         }
     }
 }

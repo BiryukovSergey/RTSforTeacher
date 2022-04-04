@@ -1,14 +1,15 @@
-﻿using Abstractions.Commands;
-using Abstractions.Commands.CommandsInterfaces;
+﻿using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
 namespace Code.Core
 {
-    public class MoveCommand : CommandExecutorBase<IMoveCommand>,IMoveCommand
+    public class MoveCommand : IMoveCommand
     {
-        public override void ExecuteSpecificCommand(IMoveCommand command)
+        public Vector3 Target { get; }
+        public MoveCommand(Vector3 target)
         {
-            Debug.Log("Move");
+            Target = target;
         }
+
     }
 }

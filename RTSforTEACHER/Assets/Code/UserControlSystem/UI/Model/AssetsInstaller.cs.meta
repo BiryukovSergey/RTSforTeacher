@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e694ea5d4a8eb53439428239350f763c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _legacyContext: {instanceID: 0}
+  - _groundClicksRMB: {instanceID: 0}
+  - _attackableClicksRMB: {instanceID: 0}
+  - _selectables: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
