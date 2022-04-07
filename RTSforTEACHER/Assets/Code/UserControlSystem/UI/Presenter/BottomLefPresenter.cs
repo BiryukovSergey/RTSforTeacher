@@ -1,7 +1,10 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Abstractions;
+using UniRx;
+using Zenject;
 
 namespace UserControlSystem
 {
@@ -13,13 +16,15 @@ namespace UserControlSystem
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private Image _sliderBackground;
         [SerializeField] private Image _sliderFillImage;
-        [SerializeField] private SelectableValue _selectedValue;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-   
+        
+        [Inject] private IObservable<ISelecatable> _selectedValues;
+
+        
+        
         private void Start()
         {
-            _selectedValue.OnNewValue += onSelected;
-            onSelected(_selectedValue.CurrentValue);
+            _selectedValues.Subscribe(onSelected);
         }
 
         private void onSelected(ISelecatable selected)
@@ -31,7 +36,6 @@ namespace UserControlSystem
             
             if (selected != null)
             {
-                Debug.Log(selected);
                 _spriteRenderer.transform.position = selected.PositionIllusion;
                 _spriteRenderer.enabled = true;
                 _selectedImage.sprite = selected.Icon;

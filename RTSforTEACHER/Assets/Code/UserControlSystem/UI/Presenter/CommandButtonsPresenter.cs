@@ -4,7 +4,6 @@ using Abstractions.Commands;
 using UnityEngine;
 using UserControlSystem.UI.View;
 using Code.UserControlSystem.UI;
-using UnityEditor.Experimental.GraphView;
 using Zenject;
 
 namespace UserControlSystem.UI.Presenter
@@ -23,6 +22,8 @@ namespace UserControlSystem.UI.Presenter
             _model.OnCommandAccepted += _view.BlockInteractions;
             _selectable.OnNewValue += onSelected;
             onSelected(_selectable.CurrentValue);
+
+
         }
         private void onSelected(ISelecatable selectable)
         {
