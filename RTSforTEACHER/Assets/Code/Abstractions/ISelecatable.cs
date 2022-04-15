@@ -2,7 +2,7 @@
 
 namespace Abstractions
 {
-    public interface ISelecatable : IHealthHolder
+    public interface ISelecatable : IHealthHolder, IIconHolder
     {
         float Health { get; }
         float MaxHealth { get; }

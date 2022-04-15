@@ -10,7 +10,7 @@ namespace Code.Core.CommandExecutors
         public CancellationTokenSource CancellationTokenSource { get; set; }
         public override void ExecuteSpecificCommand(IStopCommand command)
         {
-           CancellationTokenSource?.Cancel(); // команда не работает
+           CancellationTokenSource?.Cancel();
         }
     }
 

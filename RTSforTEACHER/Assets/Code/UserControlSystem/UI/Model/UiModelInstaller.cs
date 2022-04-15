@@ -1,5 +1,6 @@
 ﻿using Abstractions.Commands.CommandsInterfaces;
 using Code.UserControlSystem.UI;
+using Code.UserControlSystem.UI.Model;
 using UnityEngine;
 using UserControlSystem.CommandCreators;
 using UserControlSystem.CommandsRealization;
@@ -9,22 +10,29 @@ namespace UserControlSystem
 {
     public class UiModelInstaller : MonoInstaller
     {
-        [SerializeField] private AssetsContext _legacyContext;
+        /*[SerializeField] private AssetsContext _legacyContext;
         [SerializeField] private Vector3Value _vector3Value;
-        [SerializeField] private AttackableValue _attackableValueValue;
-        
+        [SerializeField] private AttackableValue _attackableValueValue;*/
+        [SerializeField] private Sprite _chomperSprite;
         public override void InstallBindings()
         {
-            Container.Bind<AssetsContext>().FromInstance(_legacyContext);
+            /*Container.Bind<AssetsContext>().FromInstance(_legacyContext);
             Container.Bind<Vector3Value>().FromInstance(_vector3Value);
-            Container.Bind<AttackableValue>().FromInstance(_attackableValueValue);
+            Container.Bind<AttackableValue>().FromInstance(_attackableValueValue);*/
+
             Container.Bind<CommandCreatorBase<IProduceUnitCommand>>().To<ProduceUnitCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IAttackCommand>>().To<AttackCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IMoveCommand>>().To<MoveCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IStopCommand>>().To<StopCommandCommandCreator>().AsTransient();
+
             Container.Bind<CommandButtonsModel>().AsTransient();
             
+            Container.Bind<float>().WithId("Chomper123").FromInstance(5f);
+            Container.Bind<string>().WithId("Chomper123").FromInstance("Chomper123");
+            Container.Bind<Sprite>().WithId("Chomper123").FromInstance(_chomperSprite);
+            
+            Container.Bind<BottomCenterModel>().AsTransient();
         }
     }
 }

@@ -12,7 +12,7 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
     [SerializeField] private Vector3Value _groundClicksRMB;
     [SerializeField] private AttackableValue _attackableClicksRMB;
     [SerializeField] private SelectableValue _selectables;
-    
+   
     public override void InstallBindings()
     {
         Container.BindInstances(_legacyContext, _selectables);
@@ -20,5 +20,4 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
         Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableClicksRMB);
         Container.Bind<IAwaitable<Vector3>>().FromInstance(_groundClicksRMB);
     }
-    
 }

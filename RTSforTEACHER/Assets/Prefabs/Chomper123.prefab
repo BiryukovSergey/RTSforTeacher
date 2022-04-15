@@ -120,19 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stop: {fileID: 1293341381}
   _animator: {fileID: 526348420347568562}
-  _stopCommandExecutor: {fileID: 1293341379}
---- !u!114 &1293341379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526348420340175472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87b177617d841d293dc0f9a45a65e1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _stopCommandExecutor: {fileID: 0}
 --- !u!195 &1293341380
 NavMeshAgent:
   m_ObjectHideFlags: 0

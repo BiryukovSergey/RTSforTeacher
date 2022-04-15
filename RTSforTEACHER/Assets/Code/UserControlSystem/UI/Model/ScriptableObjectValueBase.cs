@@ -8,13 +8,11 @@ namespace UserControlSystem
     {
         public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>
         {
-            private readonly ScriptableObjectValueBase<TAwaited>
-                _scriptableObjectValueBase;
+            private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
             private TAwaited _result;
             private Action _continuation;
             private bool _isCompleted;
-            public NewValueNotifier(ScriptableObjectValueBase<TAwaited>
-                scriptableObjectValueBase)
+            public NewValueNotifier(ScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
             {
                 _scriptableObjectValueBase = scriptableObjectValueBase;
                 _scriptableObjectValueBase.OnNewValue += onNewValue;

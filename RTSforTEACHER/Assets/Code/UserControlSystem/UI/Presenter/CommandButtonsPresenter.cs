@@ -1,28 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Abstractions;
 using Abstractions.Commands;
 using UnityEngine;
 using UserControlSystem.UI.View;
 using Code.UserControlSystem.UI;
 using Zenject;
+using UniRx;
 
 namespace UserControlSystem.UI.Presenter
 {
     public class CommandButtonsPresenter : MonoBehaviour
     {
-        [SerializeField] private SelectableValue _selectable;
         [SerializeField] private CommandButtonsView _view;
+        [Inject] private IObservable<ISelecatable> _selectedValues;
         [Inject] private CommandButtonsModel _model;
         private ISelecatable _currentSelectable;
+
         private void Start()
         {
             _view.OnClick += _model.OnCommandButtonClicked;
             _model.OnCommandSent += _view.UnblockAllInteractions;
             _model.OnCommandCancel += _view.UnblockAllInteractions;
             _model.OnCommandAccepted += _view.BlockInteractions;
-            _selectable.OnNewValue += onSelected;
-            onSelected(_selectable.CurrentValue);
-
+            _selectedValues.Subscribe(onSelected);
 
         }
         private void onSelected(ISelecatable selectable)
