@@ -1,30 +1,42 @@
-using System.Threading.Tasks;
 using Abstractions;
-using Abstractions.Commands;
-using Abstractions.Commands.CommandsInterfaces;
+using Code.Core;
+using Code.Core.CommandExecutors;
 using UnityEngine;
 
-public class Chompers : CommandExecutorBase<IAttackCommand>,ISelectable,IMoveCommand, IAttackable, IPatrolCommand,IUnit
+public class Chompers : MonoBehaviour, ISelectable,IAttackable, IUnit
 {
-    [SerializeField] private float _maxHealth = 250;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private Transform _pivotPoint;
-    
-    private float _health = 250;
     public float Health => _health;
     public float MaxHealth => _maxHealth;
-    public Sprite Icon => _icon;
-    
-    public Vector3 PositionIllusion => transform.position;
     public Transform PivotPoint => _pivotPoint;
+    public Sprite Icon => _icon;
+    public int Damage => _damage;
+
+    [SerializeField] private Animator _animator;
+    [SerializeField] private StopCommandExecutor _stopCommand;
+    [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private Sprite _icon;
+    [SerializeField] private Transform _pivotPoint;
+    [SerializeField] private int _damage = 25;
+    private float _health = 100;
 
 
-    public override async Task ExecuteSpecificCommand(IAttackCommand command)
+    public void ReceiveDamage(int amount)
     {
-        Debug.Log("Attack");
+        if (_health <= 0)
+        {
+            return;
+        }
+        _health -= amount;
+        if (_health <= 0)
+        {
+            _animator.SetTrigger("PlayDead");
+            Invoke(nameof(Destroy), 1f);
+        }
     }
 
-    public Vector3 Target { get; }
-    public Vector3 From { get; }
-    public Vector3 To { get; }
+    private async void Destroy()
+    {
+        await _stopCommand.ExecuteSpecificCommand(new StopCommand());
+        Destroy(gameObject);
+    }
 }

@@ -1,10 +1,8 @@
-using System.Threading.Tasks;
 using Abstractions;
-using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
-public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,ISelectable, IAttackable, IPatrolCommand
+public sealed class MainBuilding : MonoBehaviour,ISelectable, IAttackable, IPatrolCommand
 {
     [SerializeField] private Transform _unitsParent;
     [SerializeField] private float _maxHealth = 1000;
@@ -24,8 +22,4 @@ public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,ISel
     public Vector3 PositionIllusion => transform.position;
     public Transform PivotPoint => _pivotPoint;
 
-
-    public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
-    {
-    }
 }

@@ -18,8 +18,7 @@ namespace Code.Core
         [SerializeField] private int _continuityThreshold = 10;
         private void Awake()
         {
-            _collisionDetector.Collisions
-                .Where(_ => _agent.hasPath)
+            _collisionDetector.Collisions.Where(_ => _agent.hasPath)
                 .Where(collision => collision.collider.GetComponentInParent<IUnit>() != null)
                 .Select(_ => Time.frameCount)
                 .Distinct()

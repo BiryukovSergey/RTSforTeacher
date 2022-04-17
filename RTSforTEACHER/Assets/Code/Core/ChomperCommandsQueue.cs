@@ -14,8 +14,8 @@ namespace Code.Core
         [Inject] CommandExecutorBase<IPatrolCommand> _patrolCommandExecutor;
         [Inject] CommandExecutorBase<IAttackCommand> _attackCommandExecutor;
         [Inject] CommandExecutorBase<IStopCommand> _stopCommandExecutor;
-        private ReactiveCollection<ICommand> _innerCollection = new
-            ReactiveCollection<ICommand>();
+       
+        private ReactiveCollection<ICommand> _innerCollection = new ReactiveCollection<ICommand>();
         [Inject]
         private void Init()
         {

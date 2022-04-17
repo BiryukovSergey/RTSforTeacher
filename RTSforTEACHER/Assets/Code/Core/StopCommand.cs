@@ -1,15 +1,9 @@
-﻿using System.Threading.Tasks;
-using Abstractions.Commands;
-using Abstractions.Commands.CommandsInterfaces;
-using UnityEngine;
+﻿using Abstractions.Commands.CommandsInterfaces;
 
 namespace Code.Core
 {
-    public class StopCommand : CommandExecutorBase<IStopCommand>,IStopCommand
+    public class StopCommand : IStopCommand
     {
-        public override async Task ExecuteSpecificCommand(IStopCommand command)
-        {
-            Debug.Log("Stop");
-        }
+        
     }
 }
