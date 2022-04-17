@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
-public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelecatable, IAttackable, IPatrolCommand
+public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>,ISelectable, IAttackable, IPatrolCommand
 {
     [SerializeField] private Transform _unitsParent;
     [SerializeField] private float _maxHealth = 1000;
@@ -13,6 +14,8 @@ public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISe
     public Vector3 From { get; }
     
     public Vector3 To { get; }
+    public Vector3 RallyPoint { get; set; }
+
     
     private float _health = 1000;
     public float Health => _health;
@@ -22,7 +25,7 @@ public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISe
     public Transform PivotPoint => _pivotPoint;
 
 
-    public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+    public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
     {
     }
 }

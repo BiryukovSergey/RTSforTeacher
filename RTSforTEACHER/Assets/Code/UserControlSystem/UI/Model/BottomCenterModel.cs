@@ -1,9 +1,9 @@
 ﻿using System;
 using Abstractions;
 using UniRx;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Zenject;
+using ISelectable = Abstractions.ISelectable;
 
 namespace Code.UserControlSystem.UI.Model
 {

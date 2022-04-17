@@ -1,6 +1,4 @@
-﻿using UnityEngine.UI;
-
-namespace Abstractions
+﻿namespace Abstractions
 {
     public interface IUnitProductionTask : IIconHolder
     {

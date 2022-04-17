@@ -2,10 +2,12 @@ using System;
 using System.Linq;
 using Abstractions;
 using UniRx;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UserControlSystem;
 using Zenject;
+using ISelectable = Abstractions.ISelectable;
 
 public class MouseInteractionsPresenter : MonoBehaviour
 {
@@ -30,7 +32,7 @@ public class MouseInteractionsPresenter : MonoBehaviour
         var rmbHitsStream = rmbRays.Select(ray => (ray, Physics.RaycastAll(ray)));
         lmbHitsStream.Subscribe(hits =>
         {
-            if (weHit<ISelecatable>(hits, out var selectable))
+            if (weHit<ISelectable>(hits, out var selectable)) 
             {
                 _selectedObject.SetValue(selectable);
             }

@@ -1,9 +1,11 @@
 using System;
 using Abstractions;
 using Code.Utils;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UserControlSystem;
 using Zenject;
+using ISelectable = Abstractions.ISelectable;
 
 [CreateAssetMenu(fileName = "AssetsInstaller", menuName = "Installers/AssetsInstaller")]
 public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
@@ -15,9 +17,9 @@ public class AssetsInstaller : ScriptableObjectInstaller<AssetsInstaller>
    
     public override void InstallBindings()
     {
-        Container.BindInstances(_legacyContext, _selectables);
-        Container.Bind<IObservable<ISelecatable>>().FromInstance(_selectables);
         Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableClicksRMB);
         Container.Bind<IAwaitable<Vector3>>().FromInstance(_groundClicksRMB);
+        Container.Bind<IObservable<ISelectable>>().FromInstance(_selectables);
+        Container.BindInstances(_legacyContext, _selectables);
     }
 }

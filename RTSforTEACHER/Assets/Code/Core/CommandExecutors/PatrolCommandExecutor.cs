@@ -1,4 +1,5 @@
-﻿using Abstractions.Commands;
+﻿using System.Threading.Tasks;
+using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Code.Core.CommandExecutors
 {
     public class PatrolCommandExecutor : CommandExecutorBase<IPatrolCommand>
     {
-        public override void ExecuteSpecificCommand(IPatrolCommand command)
+        public override async Task ExecuteSpecificCommand(IPatrolCommand command)
         {
             Debug.Log($"{name} patroling!");
         }

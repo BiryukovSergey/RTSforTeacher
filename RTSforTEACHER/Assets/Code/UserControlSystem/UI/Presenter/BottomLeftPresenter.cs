@@ -18,7 +18,7 @@ namespace UserControlSystem
         [SerializeField] private Image _sliderFillImage;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         
-        [Inject] private IObservable<ISelecatable> _selectedValues;
+        [Inject] private IObservable<ISelectable> _selectedValues;
         
         
         private void Start()
@@ -26,7 +26,7 @@ namespace UserControlSystem
             _selectedValues.Subscribe(onSelected);
         }
 
-        private void onSelected(ISelecatable selected)
+        private void onSelected(ISelectable selected)
         {
             _selectedImage.enabled = selected != null;
             _healthSlider.gameObject.SetActive(selected != null);
@@ -35,7 +35,7 @@ namespace UserControlSystem
             
             if (selected != null)
             {
-                _spriteRenderer.transform.position = selected.PositionIllusion;
+               // _spriteRenderer.transform.position = selected.PositionIllusion;
                 _spriteRenderer.enabled = true;
                 _selectedImage.sprite = selected.Icon;
                 _text.text = $"{selected.Health}/{selected.MaxHealth}";

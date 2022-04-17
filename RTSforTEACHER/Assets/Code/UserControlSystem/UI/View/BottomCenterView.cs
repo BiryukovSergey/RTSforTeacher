@@ -18,8 +18,11 @@ namespace UserControlSystem.UI.View
         [SerializeField] private Image[] _images;
         [SerializeField] private GameObject[] _imageHolders;
         [SerializeField] private Button[] _buttons;
+        
         private Subject<int> _cancelButtonClicks = new Subject<int>();
+        
         private IDisposable _unitProductionTaskCt;
+        
         [Inject]
         private void Init()
         {

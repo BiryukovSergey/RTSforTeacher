@@ -12,6 +12,7 @@ namespace Code.UserControlSystem.UI.Presenter
 
     {
         [SerializeField] private GameObject _uiHolder;
+         
         private IDisposable _productionQueueAddCt;
         private IDisposable _productionQueueRemoveCt;
         private IDisposable _productionQueueReplaceCt;

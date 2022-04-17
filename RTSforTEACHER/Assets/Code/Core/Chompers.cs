@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Abstractions;
 using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 using UnityEngine;
 
-public class Chompers : CommandExecutorBase<IAttackCommand>,ISelecatable,IMoveCommand, IAttackable, IPatrolCommand
+public class Chompers : CommandExecutorBase<IAttackCommand>,ISelectable,IMoveCommand, IAttackable, IPatrolCommand,IUnit
 {
     [SerializeField] private float _maxHealth = 250;
     [SerializeField] private Sprite _icon;
@@ -18,7 +19,7 @@ public class Chompers : CommandExecutorBase<IAttackCommand>,ISelecatable,IMoveCo
     public Transform PivotPoint => _pivotPoint;
 
 
-    public override void ExecuteSpecificCommand(IAttackCommand command)
+    public override async Task ExecuteSpecificCommand(IAttackCommand command)
     {
         Debug.Log("Attack");
     }

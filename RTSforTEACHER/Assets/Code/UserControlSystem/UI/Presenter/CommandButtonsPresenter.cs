@@ -13,9 +13,11 @@ namespace UserControlSystem.UI.Presenter
     public class CommandButtonsPresenter : MonoBehaviour
     {
         [SerializeField] private CommandButtonsView _view;
-        [Inject] private IObservable<ISelecatable> _selectedValues;
+        
+        [Inject] private IObservable<ISelectable> _selectedValues;
         [Inject] private CommandButtonsModel _model;
-        private ISelecatable _currentSelectable;
+        
+        private ISelectable _currentSelectable;
 
         private void Start()
         {
@@ -23,10 +25,11 @@ namespace UserControlSystem.UI.Presenter
             _model.OnCommandSent += _view.UnblockAllInteractions;
             _model.OnCommandCancel += _view.UnblockAllInteractions;
             _model.OnCommandAccepted += _view.BlockInteractions;
+            
             _selectedValues.Subscribe(onSelected);
 
         }
-        private void onSelected(ISelecatable selectable)
+        private void onSelected(ISelectable selectable)
         {
             if (_currentSelectable == selectable)
             {
@@ -42,7 +45,8 @@ namespace UserControlSystem.UI.Presenter
             {
                 var commandExecutors = new List<ICommandExecutor>();
                 commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());
-                _view.MakeLayout(commandExecutors);
+                var queue = (selectable as Component).GetComponentInParent<ICommandsQueue>();
+                _view.MakeLayout(commandExecutors, queue);
             }
         }
     }

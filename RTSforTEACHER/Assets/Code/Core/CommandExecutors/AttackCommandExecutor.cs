@@ -1,4 +1,5 @@
-﻿using Abstractions.Commands;
+﻿using System.Threading.Tasks;
+using Abstractions.Commands;
 using Abstractions.Commands.CommandsInterfaces;
 
 
@@ -6,7 +7,7 @@ namespace Code.Core.CommandExecutors
 {
     public class AttackCommandExecutor : CommandExecutorBase<IAttackCommand>
     {
-        public override void ExecuteSpecificCommand(IAttackCommand command)
+        public override async Task ExecuteSpecificCommand(IAttackCommand command)
         {
             
         }
