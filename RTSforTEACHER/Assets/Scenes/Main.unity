@@ -7644,7 +7644,7 @@ PrefabInstance:
     - target: {fileID: 526348418262884348, guid: d9c5841464388b54283b9d8dcd5d6956, type: 3}
       propertyPath: _stopCommand
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 889108143}
     - target: {fileID: 526348420339813968, guid: d9c5841464388b54283b9d8dcd5d6956, type: 3}
       propertyPath: m_RootOrder
       value: 0
